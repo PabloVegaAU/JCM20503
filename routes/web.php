@@ -1,22 +1,24 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\AulaController;
+use App\Http\Controllers\Admin\CursoController;
+use App\Http\Controllers\Admin\DocenteController;
+use App\Http\Controllers\Admin\HorarioController;
+use App\Http\Controllers\Admin\EstudianteController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Auth::routes([
+    'register' => false, // Registration Routes...
+    'reset' => false, // Password Reset Routes...
+    'verify' => false, // Email Verification Routes...
+]);
 
-/* Route::get('/', function () {
-    return view('welcome');
-}); */
+Route::get('', [HomeController::class, 'index'])->name('AulaVirtual');
 
-Auth::routes(['register' => false]);
-
-Route::get('', [App\Http\Controllers\HomeController::class, 'index'])->name('AulaVirtual');
+Route::resource('Estudiantes', EstudianteController::class)->names('admin.estudiantes');
+Route::resource('Docentes', DocenteController::class)->names('admin.docentes');
+Route::resource('Aulas', AulaController::class)->names('admin.aulas');
+Route::resource('Cursos', CursoController::class)->names('admin.cursos');
+Route::resource('Horarios', HorarioController::class)->names('admin.horarios');

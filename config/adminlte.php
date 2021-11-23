@@ -248,11 +248,7 @@ return [
             'text' => 'search',
 
         ],*/
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
+        //Pagian Principal
         [
             'text'        => 'Principal',
             'route'         => 'AulaVirtual',
@@ -269,28 +265,92 @@ return [
         ['header' => 'MANTENIMIENTOS'],
         [
             'text' => 'Docentes',
-            'url'  => 'admin/settings',
             'icon' => 'fas fa-user-tie',
+            'submenu' => [
+                [
+                    'text' => 'Mostrar',
+                    'icon_color' => 'blue',
+                    'route'  => 'admin.docentes.index',
+                    /* 'can' => 'admin.docentes.index' */
+                ],
+                [
+                    'text' => 'Agregar',
+                    'icon_color' => 'blue',
+                    'route'  => 'admin.docentes.create',
+                    /* 'can' => 'admin.docentes.create' */
+                ],
+            ],
         ],
         [
-            'text' => 'Alumnos',
-            'url'  => 'admin/settings',
+            'text' => 'Estudiantes',
             'icon' => 'fas fa-user-graduate',
+            'submenu' => [
+                [
+                    'text' => 'Mostrar',
+                    'icon_color' => 'blue',
+                    'route'  => 'admin.estudiantes.index',
+                    /* 'can' => 'admin.estudiantes.index' */
+                ],
+                [
+                    'text' => 'Agregar',
+                    'route'  => 'admin.estudiantes.create',
+                    /* 'can' => 'admin.estudiantes.create' */
+                ],
+            ],
         ],
         [
-            'text' => 'Salones',
-            'url'  => 'admin/settings',
+            'text' => 'Aulas',
             'icon' => 'fas fa-users',
+            'submenu' => [
+                [
+                    'text' => 'Mostrar',
+                    'icon_color' => 'blue',
+                    'route'  => 'admin.aulas.index',
+                    /* 'can' => 'admin.aulas.index' */
+                ],
+                [
+                    'text' => 'Agregar',
+                    'icon_color' => 'blue',
+                    'route'  => 'admin.aulas.create',
+                    /* 'can' => 'admin.aulas.create' */
+                ],
+            ],
         ],
         [
             'text' => 'Cursos',
-            'url'  => 'admin/settings',
             'icon' => 'fas fa-book',
+            'submenu' => [
+                [
+                    'text' => 'Mostrar',
+                    'icon_color' => 'blue',
+                    'route'  => 'admin.cursos.index',
+                    /* 'can' => 'admin.cursos.index' */
+                ],
+                [
+                    'text' => 'Agregar',
+                    'icon_color' => 'blue',
+                    'route'  => 'admin.cursos.create',
+                    /* 'can' => 'admin.cursos.create' */
+                ],
+            ],
         ],
         [
             'text' => 'Horarios',
-            'url'  => 'admin/settings',
             'icon' => 'far fa-calendar-alt',
+            'submenu' => [
+                [
+                    'text' => 'Mostrar',
+                    'icon_color' => 'blue',
+                    'route'  => 'admin.horarios.index',
+                    /* 'can' => 'admin.horarios.index' */
+                ],
+                [
+                    'text' => 'Agregar',
+                    'icon_color' => 'blue',
+                    'route'  => 'admin.horarios.create',
+                    /* 'can' => 'admin.horarios.create' */
+                ],
+            ],
         ],
         ['header' => 'labels'],
         [
@@ -351,17 +411,27 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
+                    'location' => '//code.jquery.com/jquery-3.5.1.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
                     'location' => '//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js',
+                    'location' => '//cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '//cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css',
+                    'location' => '//cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css',
                 ],
             ],
         ],
@@ -391,12 +461,12 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
                 ],
             ],
         ],

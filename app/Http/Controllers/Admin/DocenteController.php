@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Docente;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DocenteController extends Controller
@@ -31,7 +32,8 @@ class DocenteController extends Controller
      */
     public function create()
     {
-        return view('Mantenimientos.MDocentes.create');
+        $users = User::all();
+        return view('Mantenimientos.MDocentes.create', compact('users'));
     }
 
     /**
@@ -42,7 +44,35 @@ class DocenteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Validación de REQUEST
+        $request->validate([
+            'username' => 'required|max:20|string',
+            'sexo' => 'required|string',
+            'dni' => 'required|digits:8|integer',
+            'ntelefono' => 'required|digits:9|integer',
+            'fnacimiento' => 'required||date',
+            'edad' => 'required|min:18|max:80|integer',
+            'direccion' => 'required|max:20|string',
+            'name' => 'required|max:20|string',
+            'password' => 'required|max:20|string'
+        ]);
+        //Crear Usuario
+        $user = User::Create([
+            'name' => $request->name,
+            'password' => bcrypt($request->password)
+        ]);
+        //Crear Docente
+        Docente::Create([
+            'username' => $request->username,
+            'sexo' => $request->sexo,
+            'dni' => $request->dni,
+            'ntelefono' => $request->ntelefono,
+            'fnacimiento' => $request->fnacimiento,
+            'edad' => $request->edad,
+            'direccion' => $request->direccion,
+            'user_id' => $user->id
+        ]);
+        return redirect()->route('admin.docentes.index');
     }
 
     /**
@@ -62,9 +92,10 @@ class DocenteController extends Controller
      * @param  \App\Models\Docente  $docente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Docente $docente)
+    public function edit($id)
     {
-        //
+        $docente = Docente::findOrFail($id);
+        return view('Mantenimientos.MDocentes.edit', compact('docente'));
     }
 
     /**
@@ -74,9 +105,23 @@ class DocenteController extends Controller
      * @param  \App\Models\Docente  $docente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Docente $docente)
+    public function update(Request $request, $id)
     {
-        //
+        $docente = Docente::findOrFail($id);
+
+        $request->validate([
+            'username' => 'required|max:20|string',
+            'sexo' => 'required|string',
+            'dni' => 'required|digits:8|integer',
+            'ntelefono' => 'required|digits:9|integer',
+            'fnacimiento' => 'required||date',
+            'edad' => 'required|min:18|max:80|integer',
+            'direccion' => 'required|max:20|string'
+        ]);
+
+        //actualiza docente
+        $docente->update($request->all());
+        return redirect()->route('admin.docentes.edit', $docente);
     }
 
     /**
@@ -85,9 +130,9 @@ class DocenteController extends Controller
      * @param  \App\Models\Docente  $docente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Docente $docente)
+    public function destroy($docente)
     {
-        $docente->delete();
+        Docente::destroy($docente);
         return redirect()->route('admin.docentes.index')->with('mensaje', 'ok');
     }
 }

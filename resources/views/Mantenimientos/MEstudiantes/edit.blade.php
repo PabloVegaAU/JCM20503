@@ -3,7 +3,7 @@
 @section('title', 'Man. estudiantes')
 
 @section('content_header')
-<h1>Añadir estudiante</h1>
+<h1>Editar estudiante: {{$estudiante->username}}</h1>
 @stop
 
 @section('content')
@@ -27,53 +27,55 @@
 
         </div>
         <div class="card-body">
-            {!! Form::open(['method' => 'POST', 'route' => 'admin.estudiantes.store']) !!}
+            {!! Form::model($estudiante, ['route' => ['admin.estudiantes.update', $estudiante->id], 'method' => 'PUT'])
+            !!}
             <div class="form-group">
                 <div class="row">
                     {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-sm">
-                        {!! Form::label('username', 'Nombres Completos') !!}
-                        {!! Form::text('username', null, ['class' => 'form-control']) !!}
+                    <div class=" form-group col-md-8">
+                        {!! Form::label('username', 'Nombre de Usuario') !!}
+                        {!! Form::text('username', $estudiante->username, ['class' => 'form-control']) !!}
                     </div>
                     {{-- Seleccionar Sexo--}}
-                    <div class=" form-group col-sm">
+                    <div class=" form-group col-md">
                         {!! Form::label('seccion', 'Sexo') !!}
-                        {!! Form::select('sexo', [ "m" => 'Masculino',"f" => 'Femenino'], null, ['class' =>
+                        {!! Form::select('sexo', [ "m" => 'Masculino',"f" => 'Femenino'], $estudiante->sexo, ['class' =>
                         'form-control'])
                         !!}
                     </div>
                 </div>
                 <div class="row">
                     {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-sm">
+                    <div class="form-group col-sm">
                         {!! Form::label('dni', 'DNI') !!}
-                        {!! Form::number('dni', null, ['class' => 'form-control']) !!}
+                        {!! Form::number('dni', $estudiante->dni, ['class' => 'form-control']) !!}
                     </div>
                     {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-sm">
+                    <div class="form-group col-sm">
                         {!! Form::label('ntelefono', 'Número Celular') !!}
-                        {!! Form::number('ntelefono', null, ['class' => 'form-control']) !!}
+                        {!! Form::number('ntelefono', $estudiante->ntelefono, ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="row">
                     {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-sm">
+                    <div class="form-group col-sm">
                         {!! Form::label('fnacimiento', 'Fecha de Nacimiento') !!}
-                        {!! Form::date('fnacimiento', null, ['class' => 'form-control']) !!}
+                        {!! Form::date('fnacimiento', $estudiante->fnacimiento, ['class' => 'form-control']) !!}
                     </div>
                     {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-sm">
+                    <div class="form-group col-sm">
                         {!! Form::label('edad', 'Edad') !!}
-                        {!! Form::number('edad', null, ['class' => 'form-control']) !!}
+                        {!! Form::number('edad', $estudiante->edad, ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="row">
                     {{-- Seleccionar Nivel--}}
                     <div class=" form-group col-sm">
                         {!! Form::label('direccion', 'Dirección') !!}
-                        {!! Form::text('direccion', null, ['class' => 'form-control']) !!}
+                        {!! Form::text('direccion', $estudiante->direccion, ['class' => 'form-control']) !!}
                     </div>
                 </div>
+                {{$estudiante->users}}
                 <div class="row">
                     {{-- Seleccionar Nivel--}}
                     <div class=" form-group col-sm">
@@ -82,10 +84,11 @@
                     </div>
                     <div class=" form-group col-sm">
                         {!! Form::label('password', 'Contraseña') !!}
-                        {!! Form::text('password', null, ['class' => 'form-control','type'=>"password"]) !!}
+                        {!! Form::text('password', null, ['class' =>
+                        'form-control','type'=>"password"]) !!}
                     </div>
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     {!! Form::label('aulas', 'Aulas') !!}
                     <div class="table-responsive">
                         <table id="aulas" class="table table-hover table-bordered" style="width:100%">
@@ -100,7 +103,8 @@
                             <tbody>
                                 @foreach ($aulas as $aula)
                                 <tr>
-                                    <th scope="row">{!! Form::radio('aulas[]', $aula->id, null, ['class' => 'mr-1']) !!}
+                                    <th scope="row">{!! Form::radio('aulas[]', $aula->id, $estudiantes, ['class' =>
+                                        'mr-1']) !!}
                                     </th>
                                     <td>
                                         @if ($aula->grado =='1')
@@ -144,23 +148,11 @@
                             </tfoot>
                         </table>
                     </div>
-                </div>
+                </div> --}}
             </div>
-            {!! Form::submit('Crear', ['class' => 'btn btn-success']) !!}
+            {!! Form::submit('Editar', ['class' => 'btn btn-success']) !!}
             {!! Form::close() !!}
         </div>
     </div>
 </div>
-@stop
-@section('js')
-<script>
-    $('#aulas').DataTable(
-        {
-            "responsive":true,
-            "auto-with":false,
-            "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
-</script>
 @stop

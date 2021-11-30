@@ -14,10 +14,10 @@ class AulaFactory extends Factory
     public function definition()
     {
         return [
-            'nivel' => $this->faker->randomElement($array = array('a', 'b', 'c')),
-            'grado' => $this->faker->randomElement($array = array('a', 'b', 'c')),
+            'nivel' => $this->faker->randomElement($array = array('p', 's')),
+            'grado' => $this->faker->randomElement($array = array('1', '2', '3', '4', '5', '6')),
             'seccion' => $this->faker->randomElement($array = array('a', 'b', 'c')),
-            'turno' => $this->faker->randomElement($array = array('a', 'b', 'c')),
+            'turno' => $this->faker->randomElement($array = array('m', 't')),
         ];
     }
 }

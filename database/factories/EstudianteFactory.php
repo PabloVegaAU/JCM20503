@@ -14,7 +14,7 @@ class EstudianteFactory extends Factory
     public function definition()
     {
         $dt = $this->faker->dateTimeBetween($startDate = '-60 years', $endDate = '-18 years');
-        $date = $dt->format("d-m-Y"); // 1994-09-24
+        $date = $dt->format("Y-m-d"); // 24-09-1994
 
         return [
             'sexo' => $this->faker->randomElement($array = array('m', 'f')),

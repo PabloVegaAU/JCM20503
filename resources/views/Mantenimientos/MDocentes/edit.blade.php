@@ -3,7 +3,7 @@
 @section('title', 'Man. Docentes')
 
 @section('content_header')
-<h1>Añadir docente</h1>
+<h1>Editar Docente: {{$docente->username}}</h1>
 @stop
 
 @section('content')
@@ -27,66 +27,55 @@
 
         </div>
         <div class="card-body">
-            {!! Form::open(['method' => 'POST', 'route' => 'admin.docentes.store']) !!}
+            {!! Form::model($docente, ['route' => ['admin.docentes.update', $docente->id], 'method' => 'PUT']) !!}
             <div class="form-group">
                 <div class="row">
                     {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-sm">
-                        {!! Form::label('username', 'Nombres Completos') !!}
-                        {!! Form::text('username', null, ['class' => 'form-control']) !!}
+                    <div class=" form-group col-md-8">
+                        {!! Form::label('username', 'Nombre de Usuario') !!}
+                        {!! Form::text('username', $docente->username, ['class' => 'form-control']) !!}
                     </div>
                     {{-- Seleccionar Sexo--}}
-                    <div class=" form-group col-sm">
+                    <div class=" form-group col-md">
                         {!! Form::label('seccion', 'Sexo') !!}
-                        {!! Form::select('sexo', [ "m" => 'Masculino',"f" => 'Femenino'], null, ['class' =>
+                        {!! Form::select('sexo', [ "m" => 'Masculino',"f" => 'Femenino'], $docente->sexo, ['class' =>
                         'form-control'])
                         !!}
                     </div>
                 </div>
                 <div class="row">
                     {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-sm">
+                    <div class="form-group col-sm">
                         {!! Form::label('dni', 'DNI') !!}
-                        {!! Form::number('dni', null, ['class' => 'form-control']) !!}
+                        {!! Form::number('dni', $docente->dni, ['class' => 'form-control']) !!}
                     </div>
                     {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-sm">
+                    <div class="form-group col-sm">
                         {!! Form::label('ntelefono', 'Número Celular') !!}
-                        {!! Form::number('ntelefono', null, ['class' => 'form-control']) !!}
+                        {!! Form::number('ntelefono', $docente->ntelefono, ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="row">
                     {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-sm">
+                    <div class="form-group col-sm">
                         {!! Form::label('fnacimiento', 'Fecha de Nacimiento') !!}
-                        {!! Form::date('fnacimiento', null, ['class' => 'form-control']) !!}
+                        {!! Form::date('fnacimiento', $docente->fnacimiento, ['class' => 'form-control']) !!}
                     </div>
                     {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-sm">
+                    <div class="form-group col-sm">
                         {!! Form::label('edad', 'Edad') !!}
-                        {!! Form::number('edad', null, ['class' => 'form-control']) !!}
+                        {!! Form::number('edad', $docente->edad, ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="row">
                     {{-- Seleccionar Nivel--}}
                     <div class=" form-group col-sm">
                         {!! Form::label('direccion', 'Dirección') !!}
-                        {!! Form::text('direccion', null, ['class' => 'form-control']) !!}
-                    </div>
-                </div>
-                <div class="row">
-                    {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-sm">
-                        {!! Form::label('name', 'Usuario') !!}
-                        {!! Form::text('name', null, ['class' => 'form-control']) !!}
-                    </div>
-                    <div class=" form-group col-sm">
-                        {!! Form::label('password', 'Contraseña') !!}
-                        {!! Form::text('password', null, ['class' => 'form-control','type'=>"password"]) !!}
+                        {!! Form::text('direccion', $docente->direccion, ['class' => 'form-control']) !!}
                     </div>
                 </div>
             </div>
-            {!! Form::submit('Crear', ['class' => 'btn btn-success']) !!}
+            {!! Form::submit('Editar', ['class' => 'btn btn-success']) !!}
             {!! Form::close() !!}
         </div>
     </div>

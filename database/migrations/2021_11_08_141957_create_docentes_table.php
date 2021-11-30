@@ -19,7 +19,7 @@ class CreateDocentesTable extends Migration
             $table->string('sexo', 1);
             $table->string('dni', 8)->unique();
             $table->string('edad', 8);
-            $table->string('fnacimiento', 10);
+            $table->date('fnacimiento');
             $table->string('ntelefono', 10)->unique();
             $table->string('direccion', 30);
             //FOREIGN USUARIO

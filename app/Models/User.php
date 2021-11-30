@@ -56,11 +56,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Estudiante::class);
     }
-    // UN USUARIO UN DOCENTE
+    /* // UN USUARIO UN DOCENTE
     public function docente()
     {
         return $this->hasOne(Docente::class);
-    }
+    } */
 
     /**
      * ADMINLTE

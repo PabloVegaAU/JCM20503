@@ -3,33 +3,35 @@
 @section('title', 'Man. Docentes')
 
 @section('content_header')
-    <h1>Mantenimiento de Docentes</h1>
+<h1>Mantenimiento de Docentes</h1>
 @stop
 
 @section('content')
-    <div class="table-responsive" style="width: 100%;">
-        <table id="example" class="table table-hover" style="font-size: 95%">
-            <thead>
-                <tr class="bg-primary">
-                    <th scope="col">Nombres Completos</th>
-                    <th scope="col">Sexo</th>
-                    <th scope="col">Dni</th>
-                    <th scope="col">Edad</th>
-                    <th scope="col">Fecha de nacimiento</th>
-                    <th scope="col">Celular</th>
-                    <th scope="col">Dirección</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($docentes as $docente)
+<div class="container">
+    <div class="card">
+        <div class="card-body table-responsive" style="width: 100%;">
+            <table id="example" class="table table-hover" style="font-size: 90%">
+                <thead>
+                    <tr class="bg-primary">
+                        <th scope="col">Nombres Completos</th>
+                        <th scope="col">Sexo</th>
+                        <th scope="col">Dni</th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Fecha de nacimiento</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($docentes as $docente)
                     <tr>
                         <td>{{ $docente->username }}</td>
                         <td>
                             @if ($docente->sexo == 'm')
-                                Masculino
+                            Masculino
                             @else
-                                Femenino
+                            Femenino
                             @endif
                         </td>
                         <td>{{ $docente->dni }}</td>
@@ -50,41 +52,43 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr class="bg-primary">
-                    <th scope="col">Nombres Completos</th>
-                    <th scope="col">Sexo</th>
-                    <th scope="col">Dni</th>
-                    <th scope="col">Edad</th>
-                    <th scope="col">Fecha de nacimiento</th>
-                    <th scope="col">Celular</th>
-                    <th scope="col">Dirección</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </tfoot>
-        </table>
+                    @endforeach
+                </tbody>
+                <tfoot>
+                    <tr class="bg-primary">
+                        <th scope="col">Nombres Completos</th>
+                        <th scope="col">Sexo</th>
+                        <th scope="col">Dni</th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Fecha de nacimiento</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
+</div>
 @stop
 
 @section('css')
 @stop
 
 @section('js')
-    {{-- DataTable --}}
-    <script>
-        $(document).ready(function() {
+{{-- DataTable --}}
+<script>
+    $(document).ready(function() {
             $('#example').DataTable({
                 language: {
                     "url": "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
                 }
             });
         });
-    </script>
-    {{-- FORMULARIO ELIMINAR docente --}}
-    <script>
-        $('.formulario-eliminar').submit(function(e) {
+</script>
+{{-- FORMULARIO ELIMINAR docente --}}
+<script>
+    $('.formulario-eliminar').submit(function(e) {
             e.preventDefault();
             Swal.fire({
                 title: '¿Estas seguro?',
@@ -101,15 +105,15 @@
                 }
             })
         });
-    </script>
-    {{-- MENSAJE DESPUES DE ELIMINAR --}}
-    @if (session('mensaje') == 'ok')
-        <script>
-            Swal.fire(
+</script>
+{{-- MENSAJE DESPUES DE ELIMINAR --}}
+@if (session('mensaje') == 'ok')
+<script>
+    Swal.fire(
                 'Eliminado!',
                 'El usuario se ha eliminado correctamente.',
                 'success'
             )
-        </script>
-    @endif
+</script>
+@endif
 @stop

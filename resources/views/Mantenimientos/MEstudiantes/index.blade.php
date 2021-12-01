@@ -41,8 +41,9 @@
                         <td>{{ $estudiante->direccion }}</td>
                         <td style="display:flex">
                             <a href="" class="btn btn-warning" style="font-size: 95%">Ver</a>
-                            <a href="{{ route('admin.estudiantes.edit', $estudiante) }}" class="btn btn-success"
-                                style="font-size: 95%">Editar</a>
+                            <a href="{{ route('admin.estudiantes.edit', $estudiante->user_id) }}"
+                                class="btn btn-success" style="font-size: 95%">Editar</a>
+
                             <form action="{{ route('admin.estudiantes.destroy', $estudiante) }}" method="post"
                                 class="formulario-eliminar">
                                 @csrf

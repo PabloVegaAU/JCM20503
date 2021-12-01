@@ -14,7 +14,14 @@ class CreateEstudiantesTable extends Migration
     public function up()
     {
         Schema::create('estudiantes', function (Blueprint $table) {
-            $table->id();
+
+            //FOREIGN USUARIO
+            $table->unsignedBigInteger('user_id')->unique();
+
+
+            //DECLARAMOS LLAVES PRIMARIAS
+            $table->primary(['user_id']);
+
             $table->string('username', 50);
             $table->string('sexo', 1);
             $table->string('dni', 8)->unique();
@@ -22,12 +29,12 @@ class CreateEstudiantesTable extends Migration
             $table->date('fnacimiento');
             $table->string('ntelefono', 10)->unique();
             $table->string('direccion', 30);
-            //FOREIGN USUARIO
-            $table->unsignedBigInteger('user_id')->unique();
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            //FOREIGN AULA
-            $table->unsignedBigInteger('aula_id');
-            $table->foreign('aula_id')->references('id')->on('aulas')->onDelete('cascade');;
+
+             //FOREIGN AULA
+             $table->unsignedBigInteger('aula_id');
+            $table->foreign('aula_id')->references('id')->on('aulas')->onDelete('cascade');
             $table->timestamps();
         });
     }

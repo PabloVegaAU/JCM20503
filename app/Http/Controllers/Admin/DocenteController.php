@@ -107,20 +107,29 @@ class DocenteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $docente = Docente::findOrFail($id);
-
         $request->validate([
             'username' => 'required|max:20|string',
             'sexo' => 'required|string',
             'dni' => 'required|digits:8|integer',
             'ntelefono' => 'required|digits:9|integer',
             'fnacimiento' => 'required||date',
-            'edad' => 'required|min:18|max:80|integer',
-            'direccion' => 'required|max:20|string'
+            'edad' => 'required|digits:2|integer',
+            'direccion' => 'required|max:20|string',
+            'name' => 'required|max:20|string'
         ]);
 
+        $docente = Docente::findOrFail($id);
+
         //actualiza docente
-        $docente->update($request->all());
+        $docente->update($request->except(['name','password']));
+
+        //actualiza docente->user
+        if ($request->password == "") {
+            $docente->user->update($request->only(['name']));
+        }else{
+            $docente->user->update(['name'=>$request->name,'password'=>bcrypt($request->password)]);
+        }
+
         return redirect()->route('admin.docentes.edit', $docente);
     }
 

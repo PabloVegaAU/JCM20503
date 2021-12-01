@@ -100,7 +100,8 @@ class EstudianteController extends Controller
     public function edit($id)
     {
         $estudiante = Estudiante::findOrFail($id);
-        return view('Mantenimientos.MEstudiantes.edit', compact('estudiante'));
+        $aulas = Aula::All();
+        return view('Mantenimientos.MEstudiantes.edit', compact('estudiante','aulas'));
     }
 
     /**
@@ -112,20 +113,29 @@ class EstudianteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $estudiante = Estudiante::findOrFail($id);
-
         $request->validate([
             'username' => 'required|max:20|string',
             'sexo' => 'required|string',
             'dni' => 'required|digits:8|integer',
             'ntelefono' => 'required|digits:9|integer',
-            'fnacimiento' => 'required||date',
+            'fnacimiento' => 'required|date',
             'edad' => 'required|min:18|max:80|integer',
             'direccion' => 'required|max:20|string',
+            'name' => 'required|max:20|string',
+            'aula_id'=>'required|integer'
         ]);
 
-        //actualiza docente
-        $estudiante->update($request->all());
+        $estudiante = Estudiante::findOrFail($id);
+
+        //actualiza estudiante
+        $estudiante->update($request->except(['name','password']));
+        //actualiza estudiante->user
+        if ($request->password == "") {
+            $estudiante->user->update($request->only(['name']));
+        }else{
+            $estudiante->user->update(['name'=>$request->name,'password' => bcrypt($request->password)]);
+        }
+
         return redirect()->route('admin.estudiantes.edit', $estudiante);
     }
 
@@ -135,11 +145,9 @@ class EstudianteController extends Controller
      * @param  \App\Models\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Estudiante $estudiante)
+    public function destroy($id)
     {
-        return var_dump($estudiante);
-        /* $estudiante->delete();
-        return redirect()->route('admin.estudiantes.index', $estudiante)->with('mensaje', 'ok');
- */
+        Estudiante::Destroy($id);
+        return redirect()->route('admin.estudiantes.index', $id)->with('mensaje', 'ok');
     }
 }

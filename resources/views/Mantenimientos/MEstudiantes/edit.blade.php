@@ -27,7 +27,8 @@
 
         </div>
         <div class="card-body">
-            {!! Form::model($estudiante, ['route' => ['admin.estudiantes.update', $estudiante->id], 'method' => 'PUT'])
+            {!! Form::model($estudiante, ['route' => ['admin.estudiantes.update', $estudiante->user_id], 'method' =>
+            'PUT'])
             !!}
             <div class="form-group">
                 <div class="row">
@@ -80,15 +81,14 @@
                     {{-- Seleccionar Nivel--}}
                     <div class=" form-group col-sm">
                         {!! Form::label('name', 'Usuario') !!}
-                        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+                        {!! Form::text('name', $estudiante->user->name, ['class' => 'form-control']) !!}
                     </div>
                     <div class=" form-group col-sm">
                         {!! Form::label('password', 'Contraseña') !!}
-                        {!! Form::text('password', null, ['class' =>
-                        'form-control','type'=>"password"]) !!}
+                        {!! Form::text('password', null, ['class' =>'form-control','type'=>"password"]) !!}
                     </div>
                 </div>
-                {{-- <div class="form-group">
+                <div class="form-group">
                     {!! Form::label('aulas', 'Aulas') !!}
                     <div class="table-responsive">
                         <table id="aulas" class="table table-hover table-bordered" style="width:100%">
@@ -103,7 +103,8 @@
                             <tbody>
                                 @foreach ($aulas as $aula)
                                 <tr>
-                                    <th scope="row">{!! Form::radio('aulas[]', $aula->id, $estudiantes, ['class' =>
+                                    <th scope="row">
+                                        {!! Form::radio('aula_id', $aula->id, $estudiante->aula,['class' =>
                                         'mr-1']) !!}
                                     </th>
                                     <td>
@@ -148,7 +149,7 @@
                             </tfoot>
                         </table>
                     </div>
-                </div> --}}
+                </div>
             </div>
             {!! Form::submit('Editar', ['class' => 'btn btn-success']) !!}
             {!! Form::close() !!}

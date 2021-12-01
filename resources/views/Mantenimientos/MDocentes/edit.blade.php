@@ -74,6 +74,19 @@
                         {!! Form::text('direccion', $docente->direccion, ['class' => 'form-control']) !!}
                     </div>
                 </div>
+                <div class="row">
+                    {{-- Seleccionar Nivel--}}
+                    <div class=" form-group col-sm">
+                        {!! Form::label('name', 'Usuario') !!}
+                        {!! Form::text('name', $docente->user->name, ['class' => 'form-control']) !!}
+                    </div>
+
+                    {{-- Seleccionar Nivel--}}
+                    <div class=" form-group col-sm">
+                        {!! Form::label('password', 'Contraseña') !!}<br>
+                        {!! Form::text('password', null, ['class' => 'form-control']) !!}
+                    </div>
+                </div>
             </div>
             {!! Form::submit('Editar', ['class' => 'btn btn-success']) !!}
             {!! Form::close() !!}

@@ -13,8 +13,10 @@ class Estudiante extends Model
 
     protected $guarded = [];
 
+    protected $primaryKey = "user_id";
+
     // UN ESTUDIANTE UN USUARIO
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

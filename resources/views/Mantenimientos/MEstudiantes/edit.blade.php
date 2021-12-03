@@ -3,7 +3,7 @@
 @section('title', 'Man. estudiantes')
 
 @section('content_header')
-<h1>Editar estudiante: {{$estudiante->username}}</h1>
+<h1>Editar estudiante: {{$estudiante->nombres}} {{$estudiante->apellidos}}</h1>
 @stop
 
 @section('content')
@@ -32,13 +32,18 @@
             !!}
             <div class="form-group">
                 <div class="row">
-                    {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-md-8">
-                        {!! Form::label('username', 'Nombre de Usuario') !!}
-                        {!! Form::text('username', $estudiante->username, ['class' => 'form-control']) !!}
+                    {{-- Seleccionar Nombres--}}
+                    <div class=" form-group col-sm">
+                        {!! Form::label('nombres', 'Nombres') !!}
+                        {!! Form::text('nombres', $estudiante->nombres, ['class' => 'form-control']) !!}
+                    </div>
+                    {{-- Seleccionar Apellidos--}}
+                    <div class=" form-group col-sm">
+                        {!! Form::label('apellidos', 'Apellidos') !!}
+                        {!! Form::text('apellidos', $estudiante->apellidos, ['class' => 'form-control']) !!}
                     </div>
                     {{-- Seleccionar Sexo--}}
-                    <div class=" form-group col-md">
+                    <div class=" form-group col-sm">
                         {!! Form::label('seccion', 'Sexo') !!}
                         {!! Form::select('sexo', [ "m" => 'Masculino',"f" => 'Femenino'], $estudiante->sexo, ['class' =>
                         'form-control'])

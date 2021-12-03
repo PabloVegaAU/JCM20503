@@ -47,7 +47,8 @@ class EstudianteController extends Controller
     {
         //Validación de REQUEST
         $request->validate([
-            'username' => 'required|max:20|string',
+            'nombres' => 'required|max:20|string',
+            'apellidos' => 'required|max:20|string',
             'sexo' => 'required|string',
             'dni' => 'required|digits:8|integer',
             'ntelefono' => 'required|digits:9|integer',
@@ -66,7 +67,8 @@ class EstudianteController extends Controller
 
         //Crear Estudiante
         Estudiante::Create([
-            'username' => $request->username,
+            'nombres' => $request->nombres,
+            'apellidos' => $request->apellidos,
             'sexo' => $request->sexo,
             'dni' => $request->dni,
             'ntelefono' => $request->ntelefono,
@@ -114,7 +116,8 @@ class EstudianteController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'username' => 'required|max:20|string',
+            'nombres' => 'required|max:20|string',
+            'apellidos' => 'required|max:20|string',
             'sexo' => 'required|string',
             'dni' => 'required|digits:8|integer',
             'ntelefono' => 'required|digits:9|integer',

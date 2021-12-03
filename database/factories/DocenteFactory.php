@@ -17,7 +17,9 @@ class DocenteFactory extends Factory
         $date = $dt->format("Y-m-d"); // 24-09-2021
 
         return [
-            'sexo' => $this->faker->randomElement($array = array('m', 'f')),
+            'nombres' => $this->faker->name(),
+            'apellidos' => $this->faker->lastName(),
+            'sexo' => $this->faker->randomElement(['m', 'f']),
             'dni' => $this->faker->unique()->randomNumber(8),
             'edad' => $this->faker->numberBetween(25,50),
             'fnacimiento' => $date,

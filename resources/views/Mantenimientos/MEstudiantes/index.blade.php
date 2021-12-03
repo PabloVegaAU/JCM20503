@@ -26,7 +26,7 @@
                 <tbody>
                     @foreach ($estudiantes as $estudiante)
                     <tr>
-                        <td>{{ $estudiante->username }}</td>
+                        <td>{{ $estudiante->nombres }} {{ $estudiante->apellidos }}</td>
                         <td>
                             @if ($estudiante->sexo == 'm')
                             Masculino

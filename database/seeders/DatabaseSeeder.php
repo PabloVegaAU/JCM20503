@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'pvegav@autonoma.edu.pe',
             'password' => bcrypt('password'),
         ]);
-        Docente::factory()->create(['username' => $user->name, 'user_id' => $user->id]);
+        Docente::factory()->create(['user_id' => $user->id]);
         //LLAMA DOCENTESEEDER
         $this->call(DocenteSeeder::class);
         //LLAMA ESTUDIANTESEEDER

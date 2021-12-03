@@ -3,7 +3,7 @@
 @section('title', 'Man. Docentes')
 
 @section('content_header')
-<h1>Editar Docente: {{$docente->username}}</h1>
+<h1>Editar Docente: {{$docente->nombres}} {{$docente->apellidos}}</h1>
 @stop
 
 @section('content')
@@ -30,13 +30,18 @@
             {!! Form::model($docente, ['route' => ['admin.docentes.update', $docente->id], 'method' => 'PUT']) !!}
             <div class="form-group">
                 <div class="row">
-                    {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-md-8">
-                        {!! Form::label('username', 'Nombre de Usuario') !!}
-                        {!! Form::text('username', $docente->username, ['class' => 'form-control']) !!}
+                     {{-- Seleccionar Nombres--}}
+                     <div class=" form-group col-sm">
+                        {!! Form::label('nombres', 'Nombres') !!}
+                        {!! Form::text('nombres', $docente->nombres, ['class' => 'form-control']) !!}
+                    </div>
+                    {{-- Seleccionar Apellidos--}}
+                    <div class=" form-group col-sm">
+                        {!! Form::label('apellidos', 'Apellidos') !!}
+                        {!! Form::text('apellidos', $docente->apellidos, ['class' => 'form-control']) !!}
                     </div>
                     {{-- Seleccionar Sexo--}}
-                    <div class=" form-group col-md">
+                    <div class=" form-group col-sm">
                         {!! Form::label('seccion', 'Sexo') !!}
                         {!! Form::select('sexo', [ "m" => 'Masculino',"f" => 'Femenino'], $docente->sexo, ['class' =>
                         'form-control'])

@@ -32,8 +32,12 @@
                 <div class="row">
                     {{-- Seleccionar Nivel--}}
                     <div class=" form-group col-sm">
-                        {!! Form::label('username', 'Nombres Completos') !!}
-                        {!! Form::text('username', null, ['class' => 'form-control']) !!}
+                        {!! Form::label('nombres', 'Nombres') !!}
+                        {!! Form::text('nombres', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <div class=" form-group col-sm">
+                        {!! Form::label('apellidos', 'Apellidos') !!}
+                        {!! Form::text('apellidos', null, ['class' => 'form-control']) !!}
                     </div>
                     {{-- Seleccionar Sexo--}}
                     <div class=" form-group col-sm">

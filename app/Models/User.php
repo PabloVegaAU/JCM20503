@@ -9,10 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Estudiante;
 use App\Models\Docente;
+use App\Models\User;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -48,7 +50,9 @@ class User extends Authenticatable
 
     public function adminlte_image()
     {
-        return 'https://picsum.photos/300/300';
+        /* return 'https://picsum.photos/300/300'; */
+        //este url nos genera imágenes ramdom
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&color=7F9CF5&background=EBF4FF';
     }
 
     // UN USUARIO UN ESTUDIANTE
@@ -72,6 +76,6 @@ class User extends Authenticatable
 
     public function adminlte_profile_url()
     {
-        return 'profile/username';
+        return 'Perfil';
     }
 }

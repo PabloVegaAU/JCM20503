@@ -80,14 +80,24 @@
                 </div>
                 <div class="row">
                     {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-sm">
+                    <div class="form-group col-sm">
                         {!! Form::label('name', 'Usuario') !!}
                         {!! Form::text('name', null, ['class' => 'form-control']) !!}
                     </div>
-                    <div class=" form-group col-sm">
+                    <div class="form-group col-sm">
                         {!! Form::label('password', 'Contraseña') !!}
                         {!! Form::text('password', null, ['class' => 'form-control','type'=>"password"]) !!}
                     </div>
+                </div>
+                {{-- Seleccionar Cursos--}}
+                <div class=" form-group">
+                    {!! Form::label('cursos', 'Cursos') !!}<br>
+                    @foreach ($cursos as $curso)
+                    <label for="especialidad">
+                        {!! Form::checkbox('cursos[]', $curso->id, null, ['class' => 'mr-1']) !!}
+                        {{$curso->ncurso}}
+                    </label><br>
+                    @endforeach
                 </div>
             </div>
             {!! Form::submit('Crear', ['class' => 'btn btn-success']) !!}

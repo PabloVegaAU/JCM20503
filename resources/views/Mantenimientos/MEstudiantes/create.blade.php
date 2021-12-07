@@ -104,7 +104,7 @@
                             <tbody>
                                 @foreach ($aulas as $aula)
                                 <tr>
-                                    <th scope="row">{!! Form::radio('aulas[]', $aula->id, null, ['class' => 'mr-1']) !!}
+                                    <th scope="row">{!! Form::radio('aula_id', $aula->id, null, ['class' => 'mr-1']) !!}
                                     </th>
                                     <td>
                                         @if ($aula->grado =='1')

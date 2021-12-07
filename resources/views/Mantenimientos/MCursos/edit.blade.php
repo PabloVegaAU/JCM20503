@@ -3,7 +3,7 @@
 @section('title', 'Man. Cursos')
 
 @section('content_header')
-<h1>Añadir Curso</h1>
+<h1>Editar Curso {{$curso->ncurso}} </h1>
 @stop
 
 @section('content')
@@ -27,18 +27,18 @@
 
         </div>
         <div class="card-body">
-            {!! Form::open(['method' => 'POST', 'route' => 'admin.cursos.store']) !!}
+            {!! Form::model($curso, ['route' => ['admin.cursos.update', $curso->id], 'method' => 'PUT']) !!}
             <div class="form-group">
                 <div class="row">
-                    {{-- Seleccionar Nivel--}}
+                    {{-- Seleccionar Nombre del Curso--}}
                     <div class=" form-group col-sm">
                         {!! Form::label('ncurso', 'Nombre del Curso') !!}
                         {!! Form::text('ncurso', null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
+                {!! Form::submit('Editar', ['class' => 'btn btn-success']) !!}
+                {!! Form::close() !!}
             </div>
-            {!! Form::submit('Crear', ['class' => 'btn btn-success']) !!}
-            {!! Form::close() !!}
         </div>
     </div>
 </div>

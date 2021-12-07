@@ -31,10 +31,11 @@ class CreateEstudiantesTable extends Migration
             $table->string('ntelefono', 10)->unique();
             $table->string('direccion', 30);
 
+            //FOREIGN USUARIO
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-             //FOREIGN AULA
-             $table->unsignedBigInteger('aula_id');
+            //FOREIGN AULA
+            $table->unsignedBigInteger('aula_id');
             $table->foreign('aula_id')->references('id')->on('aulas')->onDelete('cascade');
             $table->timestamps();
         });

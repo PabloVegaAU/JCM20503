@@ -17,8 +17,10 @@ class CreateCursoDocenteTable extends Migration
 
             $table->unsignedBigInteger('docente_id');
             $table->unsignedBigInteger('curso_id');
+
             //DECLARAMOS LLAVES PRIMARIAS
             $table->primary(['docente_id', 'curso_id']);
+
             //FOREIGN DOCENTE
             $table->foreign('docente_id')->references('id')->on('docentes')->onDelete('cascade');
             //FOREIGN CURSO

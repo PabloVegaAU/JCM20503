@@ -14,7 +14,7 @@ class CursoFactory extends Factory
     public function definition()
     {
         return [
-            'ncurso' => $this->faker->name(),
+            'ncurso' => $this->faker->unique()->randomElement(['Matematica', 'Psicologia', 'Biologia', 'Religion', 'Comunicacion']),
         ];
     }
 }

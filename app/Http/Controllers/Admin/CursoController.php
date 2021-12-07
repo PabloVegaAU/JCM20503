@@ -31,7 +31,7 @@ class CursoController extends Controller
      */
     public function create()
     {
-        //
+        return view('Mantenimientos.MCursos.create');
     }
 
     /**
@@ -42,7 +42,12 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'ncurso' => 'required|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/'
+        ]);
+        Curso::create($request->all());
+
+        return redirect()->route('admin.cursos.index');
     }
 
     /**
@@ -51,7 +56,7 @@ class CursoController extends Controller
      * @param  \App\Models\Curso  $curso
      * @return \Illuminate\Http\Response
      */
-    public function show(Curso $curso)
+    public function show($id)
     {
         //
     }
@@ -62,9 +67,10 @@ class CursoController extends Controller
      * @param  \App\Models\Curso  $curso
      * @return \Illuminate\Http\Response
      */
-    public function edit(Curso $curso)
+    public function edit($id)
     {
-        //
+        $curso = Curso::Find($id);
+        return view('Mantenimientos.MCursos.edit', compact('curso'));
     }
 
     /**
@@ -74,9 +80,17 @@ class CursoController extends Controller
      * @param  \App\Models\Curso  $curso
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Curso $curso)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'ncurso' => 'required|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/'
+        ]);
+        $curso = Curso::findOrFail($id);
+
+        //actualiza curso
+        $curso->update($request->all());
+
+        return redirect()->route('admin.cursos.edit', $curso);
     }
 
     /**
@@ -85,8 +99,9 @@ class CursoController extends Controller
      * @param  \App\Models\Curso  $curso
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Curso $curso)
+    public function destroy($id)
     {
-        //
+        Curso::destroy($id);
+        return redirect()->route('admin.cursos.index')->with('mensaje', 'ok');
     }
 }

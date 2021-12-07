@@ -14,7 +14,7 @@ class HorarioFactory extends Factory
     public function definition()
     {
         return [
-            'dia' => $this->faker->randomElement($array = array('l', 'me', 'mi', 'j', 'v')),
+            'dia' => $this->faker->randomElement(['l', 'me', 'mi', 'j', 'v']),
             'hora_i' => $this->faker->time(),
             'hora_f' => $this->faker->time()
         ];

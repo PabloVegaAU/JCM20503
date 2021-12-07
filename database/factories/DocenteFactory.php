@@ -20,7 +20,7 @@ class DocenteFactory extends Factory
             'nombres' => $this->faker->name(),
             'apellidos' => $this->faker->lastName(),
             'sexo' => $this->faker->randomElement(['m', 'f']),
-            'dni' => $this->faker->unique()->randomNumber(8),
+            'dni' => $this->faker->unique()->unique()->randomNumber(8),
             'edad' => $this->faker->numberBetween(25,50),
             'fnacimiento' => $date,
             'ntelefono' => $this->faker->unique()->randomNumber(9),

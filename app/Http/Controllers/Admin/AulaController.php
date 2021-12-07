@@ -53,8 +53,9 @@ class AulaController extends Controller
      */
     public function show($id)
     {
+        $aula = Aula::find($id);
         $estudiantes = Aula::find($id)->estudiantes;
-        return view('Mantenimientos.MAulas.show', compact('estudiantes','id'));
+        return view('Mantenimientos.MAulas.show', compact('aula', 'estudiantes'));
     }
 
     /**

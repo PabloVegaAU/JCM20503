@@ -30,8 +30,8 @@
             {!! Form::model($docente, ['route' => ['admin.docentes.update', $docente->id], 'method' => 'PUT']) !!}
             <div class="form-group">
                 <div class="row">
-                     {{-- Seleccionar Nombres--}}
-                     <div class=" form-group col-sm">
+                    {{-- Seleccionar Nombres--}}
+                    <div class=" form-group col-sm">
                         {!! Form::label('nombres', 'Nombres') !!}
                         {!! Form::text('nombres', $docente->nombres, ['class' => 'form-control']) !!}
                     </div>
@@ -85,12 +85,24 @@
                         {!! Form::label('name', 'Usuario') !!}
                         {!! Form::text('name', $docente->user->name, ['class' => 'form-control']) !!}
                     </div>
-
                     {{-- Seleccionar Nivel--}}
                     <div class=" form-group col-sm">
                         {!! Form::label('password', 'Contraseña') !!}<br>
                         {!! Form::text('password', null, ['class' => 'form-control']) !!}
                     </div>
+                </div>
+                <div class="form-group  col-md-6">
+                    {!! Form::label('cursos', 'Añadir Cursos') !!}
+                    @foreach ($cursos as $curso)
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <label for="curso">
+                                {!! Form::checkbox('cursos[]', $curso->id, $docente->cursos, ['class' =>
+                                'mr-1']) !!} {{$curso->ncurso}}</label>
+                        </li>
+                    </ul>
+                    @endforeach
+
                 </div>
             </div>
             {!! Form::submit('Editar', ['class' => 'btn btn-success']) !!}

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aula;
+use App\Models\Curso;
+use App\Models\Docente;
 use App\Models\Horario;
 use Illuminate\Http\Request;
+use PhpParser\Comment\Doc;
 
 class HorarioController extends Controller
 {
@@ -31,7 +35,10 @@ class HorarioController extends Controller
      */
     public function create()
     {
-        //
+        $aulas = Aula::all();
+        $cursos = Curso::all();
+        $docentes = Docente::all();
+        return view('Mantenimientos.MHorarios.create', compact('cursos', 'docentes', 'aulas'));
     }
 
     /**
@@ -42,7 +49,12 @@ class HorarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'hora_i' => 'date_format:H:i|required',
+            'hora_f' => 'date_format:H:i|required|after:hora_i',
+        ]);
+        $horario = Horario::create($request->except('table_length'));
+        return redirect()->route('admin.horarios.index');
     }
 
     /**

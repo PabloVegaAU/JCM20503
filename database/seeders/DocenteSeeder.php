@@ -17,7 +17,7 @@ class DocenteSeeder extends Seeder
     public function run()
     {
         //CREAR CURSO
-        $cursos = Curso::factory(10)->create();
+        $cursos = Curso::factory(5)->create();
         foreach ($cursos as $curso) {
             //CREAR DOCENTES
             $users = User::factory(2)->create();
@@ -27,7 +27,7 @@ class DocenteSeeder extends Seeder
                     //Iguala el id de los usuarios a user_id de los prefiles
                     'user_id' => $user->id,
                 ]);
-                $docente->cursos()->sync(rand(1, 10), $docente->id);
+                $docente->cursos()->sync(rand(1,5), $docente->id);
             }
         }
     }

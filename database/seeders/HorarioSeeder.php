@@ -19,7 +19,8 @@ class HorarioSeeder extends Seeder
         foreach ($aulas as $aula) {
             Horario::factory()->create([
                 'aula_id' => $aula->id,
-                'curso_id' => rand(1,10),
+                'curso_id' => rand(1,5),
+                'docente_id' => rand(1,5),
             ]);
         }
     }

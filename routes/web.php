@@ -16,9 +16,12 @@ Auth::routes([
 ]);
 
 Route::get('', [HomeController::class, 'index'])->name('AulaVirtual');
-
 Route::resource('Estudiantes', EstudianteController::class)->names('admin.estudiantes');
 Route::resource('Docentes', DocenteController::class)->names('admin.docentes');
 Route::resource('Aulas', AulaController::class)->names('admin.aulas');
 Route::resource('Cursos', CursoController::class)->names('admin.cursos');
 Route::resource('Horarios', HorarioController::class)->names('admin.horarios');
+
+Route::get('Perfil', function () {
+    return view('Perfil');
+})->name('Perfil')->middleware('auth');

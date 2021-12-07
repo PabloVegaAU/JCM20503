@@ -53,7 +53,7 @@ class EstudianteController extends Controller
             'dni' => 'required|digits:8|integer',
             'ntelefono' => 'required|digits:9|integer',
             'fnacimiento' => 'required||date',
-            'edad' => 'required|min:18|max:80|integer',
+            'edad' => 'required|min:10|max:18|integer',
             'direccion' => 'required|max:20|string',
             'name' => 'required|max:20|string',
             'password' => 'required|max:20|string',
@@ -76,7 +76,7 @@ class EstudianteController extends Controller
             'edad' => $request->edad,
             'direccion' => $request->direccion,
             'user_id' => $user->id,
-            'aula_id' => $request->aulas[0],
+            'aula_id' => $request->aula_id,
         ]);
 
         return redirect()->route('admin.estudiantes.index');
@@ -103,7 +103,7 @@ class EstudianteController extends Controller
     {
         $estudiante = Estudiante::findOrFail($id);
         $aulas = Aula::All();
-        return view('Mantenimientos.MEstudiantes.edit', compact('estudiante','aulas'));
+        return view('Mantenimientos.MEstudiantes.edit', compact('estudiante', 'aulas'));
     }
 
     /**
@@ -116,30 +116,35 @@ class EstudianteController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nombres' => 'required|max:20|string',
-            'apellidos' => 'required|max:20|string',
-            'sexo' => 'required|string',
-            'dni' => 'required|digits:8|integer',
-            'ntelefono' => 'required|digits:9|integer',
-            'fnacimiento' => 'required|date',
-            'edad' => 'required|min:18|max:80|integer',
-            'direccion' => 'required|max:20|string',
-            'name' => 'required|max:20|string',
-            'aula_id'=>'required|integer'
+            'nombres' => 'min:4||max:25|string|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'apellidos' => 'min:4||max:25|string|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'sexo' => 'min:1|string',
+            'dni' => 'digits:8|integer',
+            'ntelefono' => 'digits:9|integer',
+            'fnacimiento' => 'date',
+            'edad' => 'min:3|max:18|integer',
+            'direccion' => 'min:5|max:30|string',
+            'name' => 'min:4|max:20|string',
+            'aula_id' => 'integer'
         ]);
 
         $estudiante = Estudiante::findOrFail($id);
 
         //actualiza estudiante
-        $estudiante->update($request->except(['name','password']));
+        $estudiante->update($request->except(['name', 'password', 'perfil']));
+
         //actualiza estudiante->user
         if ($request->password == "") {
             $estudiante->user->update($request->only(['name']));
-        }else{
-            $estudiante->user->update(['name'=>$request->name,'password' => bcrypt($request->password)]);
+        } else {
+            $estudiante->user->update(['name' => $request->name, 'password' => bcrypt($request->password)]);
         }
 
-        return redirect()->route('admin.estudiantes.edit', $estudiante);
+        if ($request->perfil == 'true') {
+            return redirect()->route('Perfil')->with('mensaje', 'ok');;
+        } else {
+            return redirect()->route('admin.estudiantes.edit', $estudiante);
+        }
     }
 
     /**

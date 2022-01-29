@@ -129,7 +129,7 @@ class DocenteController extends Controller
             'edad' => 'min:18|max:80|integer',
             'direccion' => 'min:5|max:30|string',
             'name' => 'min:4|max:20|string',
-            'cursos' => 'integer'
+            'cursos' => 'required'
         ]);
 
         $docente = Docente::findOrFail($id);

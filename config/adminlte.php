@@ -262,8 +262,13 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ], */
-        ['header' => 'MANTENIMIENTOS'],
+        //Mantenimientos
         [
+            'header' => 'MANTENIMIENTOS',
+            'can' => 'mantenimientos'
+        ],
+        [
+            'can' => 'mantenimientos',
             'text' => 'Docentes',
             'icon' => 'fas fa-user-tie',
             'submenu' => [
@@ -271,17 +276,18 @@ return [
                     'text' => 'Mostrar',
                     'icon_color' => 'blue',
                     'route'  => 'admin.docentes.index',
-                    /* 'can' => 'admin.docentes.index' */
+                    'can' => 'admin.docentes.index'
                 ],
                 [
                     'text' => 'Agregar',
                     'icon_color' => 'blue',
                     'route'  => 'admin.docentes.create',
-                    /* 'can' => 'admin.docentes.create' */
+                    'can' => 'admin.docentes.create'
                 ],
             ],
         ],
         [
+            'can' => 'mantenimientos',
             'text' => 'Estudiantes',
             'icon' => 'fas fa-user-graduate',
             'submenu' => [
@@ -289,16 +295,17 @@ return [
                     'text' => 'Mostrar',
                     'icon_color' => 'blue',
                     'route'  => 'admin.estudiantes.index',
-                    /* 'can' => 'admin.estudiantes.index' */
+                    'can' => 'admin.estudiantes.index'
                 ],
                 [
                     'text' => 'Agregar',
                     'route'  => 'admin.estudiantes.create',
-                    /* 'can' => 'admin.estudiantes.create' */
+                    'can' => 'admin.estudiantes.create'
                 ],
             ],
         ],
         [
+            'can' => 'mantenimientos',
             'text' => 'Aulas',
             'icon' => 'fas fa-users',
             'submenu' => [
@@ -306,17 +313,18 @@ return [
                     'text' => 'Mostrar',
                     'icon_color' => 'blue',
                     'route'  => 'admin.aulas.index',
-                    /* 'can' => 'admin.aulas.index' */
+                    'can' => 'admin.aulas.index'
                 ],
                 [
                     'text' => 'Agregar',
                     'icon_color' => 'blue',
                     'route'  => 'admin.aulas.create',
-                    /* 'can' => 'admin.aulas.create' */
+                    'can' => 'admin.aulas.create'
                 ],
             ],
         ],
         [
+            'can' => 'mantenimientos',
             'text' => 'Cursos',
             'icon' => 'fas fa-book',
             'submenu' => [
@@ -324,17 +332,18 @@ return [
                     'text' => 'Mostrar',
                     'icon_color' => 'blue',
                     'route'  => 'admin.cursos.index',
-                    /* 'can' => 'admin.cursos.index' */
+                    'can' => 'admin.cursos.index'
                 ],
                 [
                     'text' => 'Agregar',
                     'icon_color' => 'blue',
                     'route'  => 'admin.cursos.create',
-                    /* 'can' => 'admin.cursos.create' */
+                    'can' => 'admin.cursos.create'
                 ],
             ],
         ],
         [
+            'can' => 'mantenimientos',
             'text' => 'Horarios',
             'icon' => 'far fa-calendar-alt',
             'submenu' => [
@@ -342,31 +351,37 @@ return [
                     'text' => 'Mostrar',
                     'icon_color' => 'blue',
                     'route'  => 'admin.horarios.index',
-                    /* 'can' => 'admin.horarios.index' */
+                    'can' => 'admin.horarios.index'
                 ],
                 [
                     'text' => 'Agregar',
                     'icon_color' => 'blue',
                     'route'  => 'admin.horarios.create',
-                    /* 'can' => 'admin.horarios.create' */
+                    'can' => 'admin.horarios.create'
                 ],
             ],
         ],
-        ['header' => 'labels'],
+        //ViewsEstudiante
         [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
+            'header' => 'Herramientas',
+            'can' => 'ViewsEstudiante'
         ],
         [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
+            'can' => 'ViewsEstudiante',
+            'text'       => 'Mi Horario',
+            'icon' => 'fas fa-calendar-alt',
+            'route'  => 'estudiante.index',
+        ],
+        //ViewsEstudiante
+        [
+            'header' => 'Herramientas',
+            'can' => 'ViewsDocente'
         ],
         [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
+            'can' => 'ViewsDocente',
+            'text'       => 'Mis Cursos',
+            'icon' => 'fas fa-calendar-alt',
+            'route'  => 'docente.index',
         ],
     ],
 

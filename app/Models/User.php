@@ -71,7 +71,7 @@ class User extends Authenticatable
      */
     public function adminlte_desc()
     {
-        return 'That\'s a nice guy';
+        return $this->roles[0]->name;
     }
 
     public function adminlte_profile_url()

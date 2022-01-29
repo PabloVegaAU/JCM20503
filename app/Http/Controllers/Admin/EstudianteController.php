@@ -131,7 +131,7 @@ class EstudianteController extends Controller
         $estudiante = Estudiante::findOrFail($id);
 
         //actualiza estudiante
-        $estudiante->update($request->except(['name', 'password', 'perfil']));
+        $estudiante->update($request->except(['name', 'password', 'perfil','aulas_length']));
 
         //actualiza estudiante->user
         if ($request->password == "") {

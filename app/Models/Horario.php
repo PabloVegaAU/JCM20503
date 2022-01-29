@@ -24,6 +24,7 @@ class Horario extends Model
     {
         return $this->belongsTo(Curso::class);
     }
+    // UN HORARIO TIENE UN DOCENTE
     public function docente()
     {
         return $this->belongsTo(Docente::class);

@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Pablo',
             'email' => 'pvegav@autonoma.edu.pe',
             'password' => bcrypt('password'),
-        ]);
-        Docente::factory()->create(['user_id' => $user->id, 'nombres' => $user->name, 'apellidos' => 'Vega Valverde']);
+        ])->assignRole('Admin');
+        /* Docente::factory()->create(['user_id' => $user->id, 'nombres' => $user->name, 'apellidos' => 'Vega Valverde']); */
 
         //LLAMA DOCENTESEEDER
         $this->call(DocenteSeeder::class);

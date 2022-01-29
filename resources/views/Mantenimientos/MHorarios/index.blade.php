@@ -75,8 +75,10 @@
                     </tbody>
                     <tfoot>
                         <tr class="bg-primary">
-                            <th scope="col">N°</th>
+                            <th scope="col">Aula</th>
                             <th scope="col">Día</th>
+                            <th scope="col">Curso</th>
+                            <th scope="col">Docente</th>
                             <th scope="col">Hora de Inicio</th>
                             <th scope="col">Hora Final</th>
                             {{-- <th scope="col">Acciones</th> --}}

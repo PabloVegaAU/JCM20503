@@ -15,13 +15,17 @@ class CreateHorariosTable extends Migration
     {
         Schema::create('horarios', function (Blueprint $table) {
             $table->id();
+
             //Foreign Aulas
             $table->unsignedBigInteger('aula_id');
-            $table->unsignedBigInteger('curso_id');
-            $table->unsignedBigInteger('docente_id');
             $table->foreign('aula_id')->references('id')->on('aulas')->onDelete('cascade');
+            //FOREIGN CURSO
+            $table->unsignedBigInteger('curso_id');
             $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
+            //FOREIGN DOCENTE
+            $table->unsignedBigInteger('docente_id');
             $table->foreign('docente_id')->references('id')->on('docentes')->onDelete('cascade');
+
             $table->string('dia', 50);
             $table->string('hora_i', 50);
             $table->string('hora_f', 50);

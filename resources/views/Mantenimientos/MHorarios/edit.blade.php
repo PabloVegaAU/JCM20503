@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Man. Horarios')
+@section('title')
 
 @section('content_header')
-<h1>Añadir horario</h1>
+<h1>Edición de Horario</h1>
 @stop
 
 @section('content')
@@ -25,53 +25,54 @@
             @endif
         </div>
         <div class="card-body">
-            {!! Form::open(['method' => 'POST', 'route' => 'admin.horarios.store']) !!}
+            {!! Form::model($horario, ['route' => ['admin.horarios.update', $horario->id], 'method' =>
+            'PUT'])!!}
             <div class="form-group form-row">
+                {{-- Sleccionar Aula --}}
                 <div class="col-sm">
                     {!! Form::label('aula_id', 'Aula') !!}
-                    <select class="custom-select" name="aula_id">
-                        <option selected disabled>Elegir Aula</option>
+                    <select class="custom-select text-uppercase" name="aula_id">
                         @foreach ($aulas as $aula)
-                        <option value="{{ $aula->id}}" class="text-uppercase">
+                        <option value="{{ $aula->id}}" @if ($horario->aula_id ==$aula->id)
+                            selected
+                            @endif>
                             {{ $aula->grado}} {{ $aula->seccion}}
                         </option>
                         @endforeach
                     </select>
                 </div>
+                {{-- Seleccionar Día --}}
                 <div class="col-md-4">
                     {!! Form::label('dia', 'Dia') !!}
-                    <select class="custom-select" name="dia">
-                        <option selected disabled>Elegir un dia de la semana</option>
-                        <option value="1">Lunes</option>
-                        <option value="2">Martes</option>
-                        <option value="3">Miercoles</option>
-                        <option value="4">Jueves</option>
-                        <option value="5">Viernes</option>
-                    </select>
+                    {!! Form::select('dia', [1=>'Lunes', 2=>'Martes', 3=>'Miercioles', 4=>'Jueves',
+                    5=>'Viernes'], $horario->dia, ['class' => 'custom-select']) !!}
                 </div>
             </div>
+            {{-- Seleccionar Horas --}}
             <div class="form-group form-row">
-                {{-- Seleccionar Cursos--}}
+                {{-- Seleccionar Hora de Inicio--}}
                 <div class="col-sm ">
                     {!! Form::label('hora_i', 'Hora Inicio') !!}
-                    {!! Form::time('hora_i', null, ['class' => 'form-control']) !!}
+                    {!! Form::time('hora_i', $horario->hora_i, ['class' => 'form-control','format'=>'Y:H']) !!}
                 </div>
+                {{-- Seleccionar Hora de Fin --}}
                 <div class="col-sm">
                     {!! Form::label('hora_f', 'Hora Inicio') !!}
-                    {!! Form::time('hora_f', null, ['class' => 'form-control']) !!}
+                    {!! Form::time('hora_f', $horario->hora_f, ['class' => 'form-control']) !!}
                 </div>
             </div>
+            {{-- CURSO - DOCENTES --}}
             <table id="table" class="table table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>Curso</th>
-                        <th>Docente</th>
+                        <th>Curso </th>
+                        <th>Docente </th>
                     </tr>
                 </thead>
                 @foreach ($cursos as $curso)
                 <tr>
                     <td>
-                        {!! Form::radio('curso_id', $curso->id, null, ['class' => 'mr-1']) !!}
+                        {!! Form::radio('curso_id', $curso->id, $horario->curso_id,['class' => 'mr-1']) !!}
                         {{ $curso->ncurso}}
                     </td>
                     <td>
@@ -79,7 +80,8 @@
                             @foreach ($curso->docentes as $docente)
                             <li class="list-group-item">
                                 <strong>
-                                    {!! Form::radio('docente_id', $docente->id, $curso->id, ['class' => 'mr-1']) !!}
+                                    {!! Form::radio('docente_id', $docente->id, $horario->docente_id,['class' =>
+                                    'mr-1']) !!}
                                     {{ $docente->nombres }}
                                 </strong>
                             </li>
@@ -90,22 +92,20 @@
                 @endforeach
             </table>
             <div class="text-center">
-                {!! Form::submit('Crear', ['class' => 'btn btn-success','style'=>'margin-top:1vh;']) !!}
+                {!! Form::submit('editar', ['class' => 'btn btn-success','style'=>'margin-top:1vh;']) !!}
             </div>
             {!! Form::close() !!}
         </div>
     </div>
 </div>
 @stop
+
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
 @section('js')
 <script>
-    $('#table').DataTable(
-        {
-            "responsive":true,
-            "auto-with":false,
-            "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
+    console.log('Hi!');
 </script>
 @stop

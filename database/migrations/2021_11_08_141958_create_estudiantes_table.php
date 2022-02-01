@@ -18,7 +18,6 @@ class CreateEstudiantesTable extends Migration
             //FOREIGN USUARIO
             $table->unsignedBigInteger('user_id')->unique();
 
-
             //DECLARAMOS LLAVES PRIMARIAS
             $table->primary(['user_id']);
 
@@ -29,7 +28,7 @@ class CreateEstudiantesTable extends Migration
             $table->string('edad', 8);
             $table->date('fnacimiento');
             $table->string('ntelefono', 10)->unique();
-            $table->string('direccion', 30);
+            $table->string('direccion', 100);
 
             //FOREIGN USUARIO
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

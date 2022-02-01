@@ -74,9 +74,13 @@ class HorarioController extends Controller
      * @param  \App\Models\Horario  $horario
      * @return \Illuminate\Http\Response
      */
-    public function edit(Horario $horario)
+    public function edit($id)
     {
-        //
+        $horario = Horario::FindOrFail($id);
+        $aulas = Aula::all();
+        $cursos = Curso::all();
+        $docentes = Docente::all();
+        return view('Mantenimientos.MHorarios.edit', compact('horario', 'aulas', 'cursos', 'docentes'));
     }
 
     /**
@@ -86,9 +90,23 @@ class HorarioController extends Controller
      * @param  \App\Models\Horario  $horario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Horario $horario)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'aula_id' => 'required|integer',
+            'curso_id' => 'required|integer',
+            'docente_id' => 'required|integer',
+            'dia' => 'required|integer',
+            'hora_i' => 'date_format:H:i|required',
+            'hora_f' => 'date_format:H:i|required|after:hora_i'
+        ]);
+
+        $horario = Horario::findOrFail($id);
+
+        //actualiza estudiante
+        $horario->update($request->all());
+
+        return redirect()->route('admin.horarios.edit', $horario);
     }
 
     /**
@@ -97,8 +115,9 @@ class HorarioController extends Controller
      * @param  \App\Models\Horario  $horario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Horario $horario)
+    public function destroy($id)
     {
-        //
+        Horario::Destroy($id);
+        return redirect()->route('admin.horarios.index', $id)->with('mensaje', 'ok');
     }
 }

@@ -16,6 +16,7 @@
                         <tr class="bg-primary">
                             <th scope="col">N°</th>
                             <th scope="col">Curso</th>
+                            <th scope="col">Año</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
@@ -24,6 +25,7 @@
                         <tr>
                             <th scope="row">{{ $curso->id }}</th>
                             <td>{{ $curso->ncurso }}</td>
+                            <td>{{ $curso->año }}</td>
                             <td style="display:flex;justify-content: space-between">
                                 <!-- Button trigger modal -->
                                 <button class="btn btn-warning" data-toggle="modal"
@@ -33,13 +35,6 @@
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
-                                            {{-- <div class="modal-header">
-                                                <h3 class="modal-title" id="exampleModalLabel"></h3>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div> --}}
                                             {{-- MODAL BODY --}}
                                             <div class="modal-body">
                                                 <div class="card text-center">
@@ -85,6 +80,7 @@
                         <tr class="bg-primary">
                             <th scope="col">N°</th>
                             <th scope="col">Curso</th>
+                            <th scope="col">Año</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </tfoot>
@@ -112,7 +108,7 @@
             e.preventDefault();
             Swal.fire({
                 title: '¿Estas seguro?',
-                text: "Se eliminaran todos los registros relacionados a este Curso. Esta acción es irreversible.",
+                text: "Se eliminaran todos los registros relacionados a este curso. Esta acción es irreversible.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -131,7 +127,17 @@
 <script>
     Swal.fire(
                 'Eliminado!',
-                'El Curso se ha eliminado correctamente.',
+                'El curso se ha eliminado correctamente.',
+                'error'
+            )
+</script>
+@endif
+{{-- MENSAJE DESPUES DE AÑADIR NUEVO --}}
+@if (session('mensaje') == 'new')
+<script>
+    Swal.fire(
+                'Añadido!',
+                'El curso se ha añadido correctamente.',
                 'success'
             )
 </script>

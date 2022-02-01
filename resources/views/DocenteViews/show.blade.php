@@ -41,7 +41,15 @@
                                 <div class="card">
                                     <a href="{{ route('recurso.show', $recurso->id) }}">
                                         <div class="card-header">
-                                            {{$recurso->nrecurso}}
+                                            <div class="text-center">{{$recurso->nrecurso}}</div>
+                                            <!-- ELIMINIAR -->
+                                            <form action="{{ route('recurso.destroy', $recurso->id) }}" method="post"
+                                                class="formulario-eliminar text-center">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="submit" id="delete" value="Eliminar" class="btn btn-danger"
+                                                    style="font-size: 80%">
+                                            </form>
                                         </div>
                                     </a>
                                 </div>
@@ -69,6 +77,9 @@
                                             {{-- COLOCAR MOMENTO --}}
                                             {{ Form::hidden('momento',"A") }}
                                         </div>
+                                        @error('recurso')
+                                        <small class="text-danger">{{$message}}</small>
+                                        @enderror
                                         {!! Form::submit('Subir Documento', ['class' => 'btn btn-success']) !!}
                                         {!! Form::close() !!}
                                     </div>
@@ -85,9 +96,19 @@
                                 @if (($recurso->momento=="D") && ($recurso->docente_id == Auth::user()->docente->id)&&
                                 ($recurso->curso_id == $horarios->curso_id) && ($recurso->nclase ==$i))
                                 <div class="card">
-                                    <div class="card-header">
-                                        <a href="{{ route('recurso.show', $recurso->id) }}">{{$recurso->nrecurso}}</a>
-                                    </div>
+                                    <a href="{{ route('recurso.show', $recurso->id) }}">
+                                        <div class="card-header">
+                                            <div class="text-center">{{$recurso->nrecurso}}</div>
+                                            <!-- ELIMINIAR -->
+                                            <form action="{{ route('recurso.destroy', $recurso->id) }}" method="post"
+                                                class="formulario-eliminar text-center">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="submit" id="delete" value="Eliminar" class="btn btn-danger"
+                                                    style="font-size: 80%">
+                                            </form>
+                                        </div>
+                                    </a>
                                 </div>
                                 @endif
                                 @endforeach
@@ -129,10 +150,19 @@
                                 @if (($recurso->momento=="F") && ($recurso->docente_id == Auth::user()->docente->id)&&
                                 ($recurso->curso_id == $horarios->curso_id) && ($recurso->nclase ==$i))
                                 <div class="card">
-                                    <div class="card-header">
-                                        <a href="{{ route('recurso.show', $recurso->id) }}">{{$recurso->nrecurso}}</a>
-                                    </div>
-
+                                    <a href="{{ route('recurso.show', $recurso->id) }}">
+                                        <div class="card-header">
+                                            <div class="text-center">{{$recurso->nrecurso}}</div>
+                                            <!-- ELIMINIAR -->
+                                            <form action="{{ route('recurso.destroy', $recurso->id) }}" method="post"
+                                                class="formulario-eliminar text-center">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="submit" id="delete" value="Eliminar" class="btn btn-danger"
+                                                    style="font-size: 80%">
+                                            </form>
+                                        </div>
+                                    </a>
                                 </div>
                                 @endif
                                 @endforeach
@@ -174,8 +204,13 @@
 @stop
 
 @section('js')
-<script></script>
-@stop
-@section('css')
-<style></style>
+@if (session('mensaje') == 'ok')
+<script>
+    Swal.fire(
+                'Añadido!',
+                'El recurso se ha añadido correctamente.',
+                'success'
+            )
+</script>
+@endif
 @stop

@@ -54,8 +54,8 @@ class EstudianteController extends Controller
             'ntelefono' => 'required|digits:9|integer',
             'fnacimiento' => 'required||date',
             'edad' => 'required|min:10|max:18|integer',
-            'direccion' => 'required|max:20|string',
-            'name' => 'required|max:20|string',
+            'direccion' => 'required|max:100|string',
+            'name' => 'min:4|unique:users|max:20|string',
             'password' => 'required|max:20|string',
         ]);
 
@@ -123,15 +123,15 @@ class EstudianteController extends Controller
             'ntelefono' => 'digits:9|integer',
             'fnacimiento' => 'date',
             'edad' => 'min:3|max:18|integer',
-            'direccion' => 'min:5|max:30|string',
-            'name' => 'min:4|max:20|string',
+            'direccion' => 'min:5|max:100|string',
+            'name' => 'min:4|unique:users|max:20|string',
             'aula_id' => 'integer'
         ]);
 
         $estudiante = Estudiante::findOrFail($id);
 
         //actualiza estudiante
-        $estudiante->update($request->except(['name', 'password', 'perfil','aulas_length']));
+        $estudiante->update($request->except(['name', 'password', 'perfil', 'aulas_length']));
 
         //actualiza estudiante->user
         if ($request->password == "") {

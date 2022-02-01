@@ -33,7 +33,17 @@
                     {{-- Seleccionar Nombre del Curso--}}
                     <div class=" form-group col-sm">
                         {!! Form::label('ncurso', 'Nombre del Curso') !!}
-                        {!! Form::text('ncurso', null, ['class' => 'form-control']) !!}
+                        {!! Form::text('ncurso', $curso->ncurso, ['class' => 'form-control']) !!}
+                    </div>
+                    {{-- Seleccionar Número de Clases--}}
+                    <div class=" form-group col-sm">
+                        {!! Form::label('nclases', 'Número de Clases') !!}
+                        {!! Form::text('nclases', $curso->nclases, ['class' => 'form-control']) !!}
+                    </div>
+                    {{-- Seleccionar Año--}}
+                    <div class=" form-group col-sm">
+                        {!! Form::label('año', 'Año') !!}
+                        {!! Form::text('año', $curso->año, ['class' => 'form-control']) !!}
                     </div>
                 </div>
                 {!! Form::submit('Editar', ['class' => 'btn btn-success']) !!}

@@ -151,7 +151,7 @@
 <script>
     Swal.fire(
                 'Eliminado!',
-                'El usuario se ha eliminado correctamente.',
+                'El docente se ha eliminado correctamente.',
                 'success'
             )
 </script>

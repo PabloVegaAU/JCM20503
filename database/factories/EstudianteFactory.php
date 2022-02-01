@@ -24,7 +24,7 @@ class EstudianteFactory extends Factory
             'edad' => $this->faker->numberBetween(12,18),
             'fnacimiento' => $date,
             'ntelefono' => $this->faker->unique()->randomNumber(9),
-            'direccion' => $this->faker->lastName(),
+            'direccion' => $this->faker->address(),
         ];
     }
 }

@@ -20,7 +20,7 @@
                             <th scope="col">Docente</th>
                             <th scope="col">Hora de Inicio</th>
                             <th scope="col">Hora Final</th>
-                            {{-- <th scope="col">Acciones</th> --}}
+                            <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,25 +28,26 @@
                         <tr>
                             <th scope="row">{{ $horario->aula->grado }}{{ $horario->aula->seccion }}</th>
                             <td>@switch($horario->dia)
-                                @case('l')
+                                @case('1')
                                 Lunes
                                 @break
-                                @case('me')
+                                @case('2')
                                 Martes
                                 @break
-                                @case('mi')
+                                @case('3')
                                 Miercoles
                                 @break
-                                @case('j')
+                                @case('4')
                                 Jueves
                                 @break
-                                @case('v')
+                                @case('5')
                                 Viernes
                                 @break
                                 @endswitch
                             </td>
                             <td>
-                                {{$horario->curso->ncurso}} </td>
+                                {{$horario->curso->ncurso}}
+                            </td>
                             <td>{{$horario->docente->nombres}}
                                 {{$horario->docente->apellidos}}
                             </td>
@@ -57,10 +58,10 @@
                             <td>{{$horario->hora_i}}</td>
                             <td>{{$horario->hora_f}}</td>
                             @endif
-                            {{-- <td style="display:flex">
+                            <td style="display:flex">
                                 <!-- EDITAR -->
                                 <a href=" {{ route('admin.horarios.edit', $horario->id) }}" class="btn btn-success"
-                                    style="font-size: 95%;margin-right: 1vh">Editar</a>
+                                    style="font-size: 95%;margin-right: 1vh">Editar Horario</a>
                                 <!-- ELIMINIAR -->
                                 <form action="{{ route('admin.horarios.destroy', $horario->id) }}" method="post"
                                     class="formulario-eliminar">
@@ -69,7 +70,7 @@
                                     <input type="submit" id="delete" value="Eliminar" class="btn btn-danger"
                                         style="margin: 0px 0px 0px 5px;font-size: 95%">
                                 </form>
-                            </td> --}}
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -81,7 +82,7 @@
                             <th scope="col">Docente</th>
                             <th scope="col">Hora de Inicio</th>
                             <th scope="col">Hora Final</th>
-                            {{-- <th scope="col">Acciones</th> --}}
+                            <th scope="col">Acciones</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -101,4 +102,34 @@
             });
         });
 </script>
+{{-- FORMULARIO ELIMINAR ESTUDIANTE --}}
+<script>
+    $('.formulario-eliminar').submit(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "Se eliminaran todos los registros relacionados a este horario. Esta acción es irreversible.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, estoy de acuerdo!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        });
+</script>
+{{-- MENSAJE DESPUES DE ELIMINAR --}}
+@if (session('mensaje') == 'ok')
+<script>
+    Swal.fire(
+                'Eliminado!',
+                'El horario se ha eliminado correctamente.',
+                'success'
+            )
+</script>
+@endif
 @stop

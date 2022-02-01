@@ -22,7 +22,7 @@ class CreateDocentesTable extends Migration
             $table->string('edad', 8);
             $table->date('fnacimiento');
             $table->string('ntelefono', 10)->unique();
-            $table->string('direccion', 30);
+            $table->string('direccion', 100);
             //FOREIGN USUARIO
             $table->unsignedBigInteger('user_id')->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

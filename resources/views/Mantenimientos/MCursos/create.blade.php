@@ -31,9 +31,19 @@
             <div class="form-group">
                 <div class="row">
                     {{-- Seleccionar Nivel--}}
-                    <div class=" form-group col-sm">
+                    <div class=" form-group col-6">
                         {!! Form::label('ncurso', 'Nombre del Curso') !!}
                         {!! Form::text('ncurso', null, ['class' => 'form-control']) !!}
+                    </div>
+                    {{-- Seleccionar Nivel--}}
+                    <div class=" form-group col">
+                        {!! Form::label('nclases', 'Número de Clases') !!}
+                        {!! Form::number('nclases', null, ['class' => 'form-control']) !!}
+                    </div>
+                    {{-- Seleccionar Nivel--}}
+                    <div class=" form-group col">
+                        {!! Form::label('año', 'Año') !!}
+                        {!! Form::number('año', (date('Y')), ['class' => 'form-control']) !!}
                     </div>
                 </div>
             </div>
@@ -42,4 +52,16 @@
         </div>
     </div>
 </div>
+@stop
+@section('js')
+{{-- MENSAJE DESPUES DE EXISTE --}}
+@if (session('mensaje') == 'exist')
+<script>
+    Swal.fire(
+                'EXISTE!',
+                'El curso ya existe.',
+                'error'
+            )
+</script>
+@endif
 @stop

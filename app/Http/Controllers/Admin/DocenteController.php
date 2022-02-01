@@ -56,8 +56,8 @@ class DocenteController extends Controller
             'ntelefono' => 'required|digits:9|integer',
             'fnacimiento' => 'required||date',
             'edad' => 'required|min:18|max:80|integer',
-            'direccion' => 'required|max:20|string',
-            'name' => 'required|max:20|string',
+            'direccion' => 'required|max:100|string',
+            'name' => 'min:4|unique:users|max:20|string',
             'password' => 'required|max:20|string',
             'cursos' => 'required'
         ]);
@@ -127,15 +127,15 @@ class DocenteController extends Controller
             'ntelefono' => 'digits:9|integer',
             'fnacimiento' => 'date',
             'edad' => 'min:18|max:80|integer',
-            'direccion' => 'min:5|max:30|string',
+            'direccion' => 'min:5|max:100|string',
             'name' => 'min:4|max:20|string',
-            'cursos' => 'required'
+            'cursos' => ''
         ]);
 
         $docente = Docente::findOrFail($id);
 
         //actualiza docente
-        $docente->update($request->except(['name', 'password', 'perfil', 'cursos']));
+        $docente->update($request->except(['name', 'password', 'perfil', 'cursos', 'aulas_length']));
 
         //Campo de cursos
         $docente->cursos()->sync($request->cursos);

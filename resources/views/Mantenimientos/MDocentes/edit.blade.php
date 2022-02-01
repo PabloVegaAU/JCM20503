@@ -91,18 +91,45 @@
                         {!! Form::text('password', null, ['class' => 'form-control']) !!}
                     </div>
                 </div>
-                <div class="form-group  col-md-6">
+                <div class="form-group">
                     {!! Form::label('cursos', 'Añadir Cursos') !!}
-                    @foreach ($cursos as $curso)
+                    <div class="table-responsive">
+                        <table id="aulas" class="table table-hover table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th scope="col">CURSO</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($cursos as $curso)
+                                @if ($curso->año == date('Y'))
+                                <tr>
+                                    <td> {!! Form::checkbox('cursos[]', $curso->id, $docente->cursos, ['class' =>
+                                        'mr-1']) !!}{{$curso->ncurso }}</td>
+                                </tr>
+                                @endif
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th scope="col">CURSO</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    {{-- @foreach ($cursos as $curso)
+                    @if ($curso->año == date('Y'))
                     <ul class="list-group">
                         <li class="list-group-item">
                             <label for="curso">
                                 {!! Form::checkbox('cursos[]', $curso->id, $docente->cursos, ['class' =>
-                                'mr-1']) !!} {{$curso->ncurso}}</label>
+                                'mr-1']) !!}
+                                {{$curso->ncurso}} - {{$curso->año}}
+                            </label>
                         </li>
                     </ul>
-                    @endforeach
-
+                    @endif
+                    @endforeach --}}
                 </div>
             </div>
             {!! Form::submit('Editar', ['class' => 'btn btn-success']) !!}
@@ -110,4 +137,16 @@
         </div>
     </div>
 </div>
+@stop
+@section('js')
+{{-- DataTable --}}
+<script>
+    $(document).ready(function() {
+            $('#aulas').DataTable({
+                language: {
+                    "url": "//cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json"
+                }
+            });
+        });
+</script>
 @stop

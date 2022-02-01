@@ -90,8 +90,6 @@ class AulaController extends Controller
     public function destroy($id)
     {
         Aula::destroy($id);
-        return redirect()
-            ->route('admin.aulas.index')
-            ->with('mensaje', 'ok');
+        return redirect()->route('admin.aulas.index')->with('mensaje', 'ok');
     }
 }

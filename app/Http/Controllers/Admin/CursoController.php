@@ -42,12 +42,21 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'ncurso' => 'required|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/'
-        ]);
-        Curso::create($request->all());
 
-        return redirect()->route('admin.cursos.index');
+        $request->validate([
+            'ncurso' => 'required|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'nclases' => 'required|integer|between:1,500',
+            'año' => 'required|integer|after_or_equal:' . (date('Y')),
+        ]);
+
+        //Si Exite un Curso con el mismo año
+        if (Curso::where([['ncurso', '=', $request->ncurso], ['año', '=',  $request->año]])->exists()) {
+            return redirect()->route('admin.cursos.create')->with('mensaje', 'exist');
+        } else {
+            Curso::create($request->all());
+
+            return redirect()->route('admin.cursos.index')->with('mensaje', 'new');
+        }
     }
 
     /**
@@ -83,8 +92,12 @@ class CursoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'ncurso' => 'required|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/'
+            'ncurso' => 'required|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/',
+            'nclases' => 'required|integer|between:1,500',
+            'año' => 'required|integer|after_or_equal:' . (date('Y')),
         ]);
+
+        //Buscar Curso
         $curso = Curso::findOrFail($id);
 
         //actualiza curso

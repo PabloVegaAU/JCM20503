@@ -40,25 +40,26 @@ class RController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'recurso' => 'required|file',
-            'nrecurso' => 'string|required|unique:recursos',
+            'recurso' => 'required|file|max:5000',
+            'nrecurso' => 'string|required',
             'horario_id' => 'required'
         ]);
+
         if ($request->hasFile("recurso")) {
             $file = $request->file("recurso");
             $nombre = $request->nrecurso . "." . $file->guessExtension();
-            $ruta = storage_path("app/public/recursos/" . $nombre);
             if ($file->guessExtension() == "pdf") {
+                $ruta = storage_path('\app\public\recursos/' . $nombre);
                 copy($file, $ruta);
                 $nuevoR = Recursos::Create([
                     'docente_id' => Auth::user()->docente->id,
                     'curso_id' => $request->curso_id,
                     'nrecurso' => $request->nrecurso,
-                    'ruta' => $ruta, 'nclase' => $request->nclase,
+                    'ruta' => 'storage/recursos/' . $nombre,
+                    'nclase' => $request->nclase,
                     'momento' => $request->momento
                 ]);
-
-                return redirect()->route('docente.show', $request->horario_id);
+                return redirect()->route('docente.show', $request->horario_id)->with('mensaje','ok');
             } else {
                 return redirect()->route('docente.show', $request->horario_id);
             }
@@ -74,7 +75,6 @@ class RController extends Controller
     public function show($id)
     {
         $recurso = Recursos::FindOrFail($id);
-        /* return $recurso; */
         return Storage::download('public/recursos/' . $recurso->nrecurso . '.pdf');
     }
 
@@ -107,8 +107,12 @@ class RController extends Controller
      * @param  \App\Models\Recursos  $recursos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recursos $recursos)
+    public function destroy($id)
     {
-        //
+        $recurso = Recursos::FindOrFail($id);
+        $ruta = str_replace('storage', 'public', $recurso->ruta);
+        Storage::Delete($ruta);
+        $recurso->delete();
+        return redirect()->route('docente.index')->with('mensaje', 'ok');
     }
 }

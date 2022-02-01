@@ -89,7 +89,7 @@
                 <div class="col">
                     <h2 class="bg-primary text-center">Lunes</h2>
                     @foreach ($aula->horarios->sortBy('hora_i') as $horario)
-                    @if ($horario->dia == 'l')
+                    @if ($horario->dia == '1')
                     <div class="row p-3">
                         <div class="btn-outline-primary w-100 text-center">
                             {{$horario->curso->ncurso}}
@@ -107,7 +107,7 @@
                 <div class="col">
                     <h2 class="bg-white text-center">Martes</h2>
                     @foreach ($aula->horarios->sortBy('hora_i') as $horario)
-                    @if ($horario->dia == 'me')
+                    @if ($horario->dia == '2')
                     <div class="row p-3">
                         <div class="btn-outline-dark w-100 text-center">
                             {{$horario->curso->ncurso}}
@@ -125,7 +125,7 @@
                 <div class="col">
                     <h2 class="bg-primary text-center">Miercoles</h2>
                     @foreach ($aula->horarios->sortBy('hora_i') as $horario)
-                    @if ($horario->dia == 'mi')
+                    @if ($horario->dia == '3')
                     <div class="row p-3">
                         <div class="btn-outline-primary w-100 text-center">
                             {{$horario->curso->ncurso}}
@@ -143,7 +143,7 @@
                 <div class="col">
                     <h2 class="bg-white text-center">Jueves</h2>
                     @foreach ($aula->horarios->sortBy('hora_i') as $horario)
-                    @if ($horario->dia == 'j')
+                    @if ($horario->dia == '4')
                     <div class="row p-3">
                         <div class="btn-outline-dark w-100 text-center">
                             {{$horario->curso->ncurso}}
@@ -161,7 +161,7 @@
                 <div class="col">
                     <h2 class="bg-primary text-center">Viernes</h2>
                     @foreach ($aula->horarios->sortBy('hora_i') as $horario)
-                    @if ($horario->dia == 'v')
+                    @if ($horario->dia == '5')
                     <div class="row p-3">
                         <div class="btn-outline-primary w-100 text-center">
                             {{$horario->curso->ncurso}}

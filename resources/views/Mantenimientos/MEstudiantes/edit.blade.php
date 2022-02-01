@@ -28,8 +28,7 @@
         </div>
         <div class="card-body">
             {!! Form::model($estudiante, ['route' => ['admin.estudiantes.update', $estudiante->user_id], 'method' =>
-            'PUT'])
-            !!}
+            'PUT'])!!}
             <div class="form-group">
                 <div class="row">
                     {{-- Seleccionar Nombres--}}
